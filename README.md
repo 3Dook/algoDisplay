@@ -1,3 +1,19 @@
+#AlgoDisplay
+This is a react based project use to stimulate and show step by step process
+of Algorithms. 
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
