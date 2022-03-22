@@ -1,0 +1,26 @@
+.gridContainer {
+    background-color: beige;
+    padding: 5%;
+}
+
+.flex-container {
+    height: 100%;
+    background-color: brown;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.flex-item {
+    background-color: aliceblue;
+    display: flex;
+    flex-grow: 1;
+}
+
+.flex-item > div {
+    flex-grow: 1;
+    border: 1px solid black;
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+}

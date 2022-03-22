@@ -6,23 +6,22 @@ import ControlButtons from './components/controlButtons';
 function App() {
 
   const [data, setData] = useState({
-    columnSize: 10,
-    rowSize: 10,
+    columnSize: 3,
+    rowSize: 3,
     start: {
       symbol: 'A',
-      column: 1,
-      row: 2,
+      column: 0,
+      row: 0,
     },
     end: {
       symbol: 'B',
-      column: 2,
-      row: 4,
+      column: 1,
+      row: 0,
     },
     grid: [[0,0],[0,0]]
   })
 
   function handleUpdate(){
-    console.log("Sup")
     setData((prevState) => ({
       ...prevState,
       columnSize: 20,
@@ -31,9 +30,9 @@ function App() {
 
   function updateGrid(){
     // GRID Size
-    const arr = new Array(data.rowSize);
+    const arr = new Array(data.columnSize);
     for (let i=0; i<arr.length; i++) {
-        arr[i] = new Array(data.columnSize).fill(0);
+        arr[i] = new Array(data.columnSize).fill(i);
     }    
 
     arr[data.start.row][data.start.column] = data.start.symbol;
@@ -48,7 +47,7 @@ function App() {
   }
 
   useEffect(()=>{
-    console.log(data.grid)
+    updateGrid()
   }, [])
 
   return (
