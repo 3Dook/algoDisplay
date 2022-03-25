@@ -4,18 +4,33 @@ import './display.css';
 
 
 function DisplayGraph(props){
-
-    const [borderColor, setBorderColor] = useState("black")
-    const [miniData, setMiniData] = useState(0)
+/* 
+    const [borderColor, setBorderColor] = useState("black") */
+    const [miniData, setMiniData] = useState({
+        content: "*",
+        row: 0,
+        column: 0
+    })
 
     function handleMouseDown(e, cell, row, column){
         e.preventDefault()
-        console.log(cell, row, column)
+        let temp = {
+            content: cell,
+            row: row,
+            column: column
+        }
+        setMiniData(temp)
     } 
 
     function handleMouseUp(e, cell, row, column){
         e.preventDefault()
-        console.log("released", cell, row, column)
+        //console.log("released", cell, row, column)
+        let temp = {
+            content: cell,
+            row: row,
+            column: column
+        }
+        props.swap(miniData, temp);
     }
 
     return (

@@ -21,10 +21,10 @@ function App() {
     grid: [[0,0],[0,0]]
   })
 
-  function handleUpdate(){
+  function handleUpdate(newSize){
     setData((prevState) => ({
       ...prevState,
-      columnSize: 20,
+      columnSize: newSize,
     }));
   };
 
@@ -43,8 +43,21 @@ function App() {
       grid: arr,
     }));
 
-    console.log(data.grid)
+    console.log(data)
   }
+
+  function swapPosition(cellOne, cellTwo){
+    // get the grid and swap the position.
+    data.grid[cellOne.row][cellOne.column] = cellTwo.content;
+    data.grid[cellTwo.row][cellTwo.column] = cellOne.content;
+
+    setData((prevState) => ({
+      ...prevState,
+      grid: data.grid,
+    }));
+  }
+
+
 
   useEffect(()=>{
     updateGrid()
@@ -54,7 +67,7 @@ function App() {
     <div className="App">
       <div className='appHeader'><h1>DDD ALGORITHM VISUALIZER</h1></div>
       <ControlButtons className='appControl'update={handleUpdate} displayGrid={updateGrid}/>
-      <DisplayGraph className='appDisplay' data={data}/>
+      <DisplayGraph className='appDisplay' data={data} swap={swapPosition}/>
     </div>
   );
 }
