@@ -11,10 +11,10 @@ function ControlButtons(props){
         if(msgHandler(e.target.value)){
             setmsg("")
             setSize(e.target.value)
-            if (e.target.value < 21){
-                props.update(parseInt(e.target.value))
-            }
+            props.update(parseInt(e.target.value))     
+            props.displayGrid()
         }
+        props.displayGrid()
     }
 
     function isNumber(input){
@@ -44,7 +44,6 @@ function ControlButtons(props){
     return (
         <div>
             <div>
-                Control Buttons
                 <input type="text" onChange={handleSize} placeholder={" Current " + size}></input>
                 <button onClick={props.displayGrid}>Display </button>
             </div>

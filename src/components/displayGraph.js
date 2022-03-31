@@ -33,11 +33,21 @@ function DisplayGraph(props){
         props.swap(miniData, temp);
     }
 
+    function handleBlock(e, cell, row, column){
+        e.preventDefault()
+        if(!(cell=="A" || cell=="B")){
+            if(cell >= 0){
+                props.updateCell(-1, row, column)
+            } else {
+                props.updateCell(0, row, column)
+            }
+        }
+    }
+
     return (
         <div 
             className="gridContainer"
         >
-            Graph - from DISPLAY {props.data.columnSize}
             <div
                 className="flex-container"
             >
@@ -49,6 +59,10 @@ function DisplayGraph(props){
                             {row.map((cell, cellIndex)=>{
                                 return(
                                     <div key={cellIndex}
+                                        onClick={(e)=>{
+                                            handleBlock(e, cell, rowIndex, cellIndex)
+                                        }}
+
                                         onMouseDown={(e)=>{
                                             handleMouseDown(e, cell, rowIndex, cellIndex)
                                         }}

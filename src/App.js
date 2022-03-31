@@ -6,8 +6,8 @@ import ControlButtons from './components/controlButtons';
 function App() {
 
   const [data, setData] = useState({
-    columnSize: 3,
-    rowSize: 3,
+    columnSize: 2,
+    rowSize: 2,
     start: {
       symbol: 'A',
       column: 0,
@@ -28,11 +28,19 @@ function App() {
     }));
   };
 
+  function handleCellUpdate(newCell, row, column){
+    data.grid[row][column] = newCell
+
+    setData((prevState) => ({
+      ...prevState,
+      grid: [...data.grid],
+    }));    
+  }
   function updateGrid(){
     // GRID Size
     const arr = new Array(data.columnSize);
     for (let i=0; i<arr.length; i++) {
-        arr[i] = new Array(data.columnSize).fill(i);
+        arr[i] = new Array(data.columnSize).fill(0);
     }    
 
     arr[data.start.row][data.start.column] = data.start.symbol;
@@ -42,8 +50,6 @@ function App() {
       ...prevState,
       grid: arr,
     }));
-
-    console.log(data)
   }
 
   function swapPosition(cellOne, cellTwo){
@@ -67,7 +73,7 @@ function App() {
     <div className="App">
       <div className='appHeader'><h1>DDD ALGORITHM VISUALIZER</h1></div>
       <ControlButtons className='appControl'update={handleUpdate} displayGrid={updateGrid}/>
-      <DisplayGraph className='appDisplay' data={data} swap={swapPosition}/>
+      <DisplayGraph className='appDisplay' data={data} swap={swapPosition} updateCell={handleCellUpdate}/>
     </div>
   );
 }
