@@ -4,7 +4,7 @@ import { useState } from "react";
 
 
 function ControlButtons(props){
-    const [size, setSize] = useState(3);
+    const [size, setSize] = useState(2);
     const [msg, setmsg] = useState("Graph size min - max: 2 - 20")
 
     function handleSize(e){
