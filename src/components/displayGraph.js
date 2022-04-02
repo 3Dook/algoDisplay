@@ -44,6 +44,16 @@ function DisplayGraph(props){
         }
     }
 
+    function colorDisplay(cell){
+        if(cell == "A" || cell == "B"){
+            return "gray"
+        } else if (cell == -1){
+            return "black"
+        } else {
+            return "white"
+        }
+    }
+
     return (
         <div 
             className="gridContainer"
@@ -59,6 +69,8 @@ function DisplayGraph(props){
                             {row.map((cell, cellIndex)=>{
                                 return(
                                     <div key={cellIndex}
+                                        className="cellBlock"
+
                                         onClick={(e)=>{
                                             handleBlock(e, cell, rowIndex, cellIndex)
                                         }}
@@ -68,6 +80,10 @@ function DisplayGraph(props){
                                         }}
                                         onMouseUp={(e)=>{
                                             handleMouseUp(e, cell, rowIndex, cellIndex)
+                                        }}
+                                        
+                                        style={{
+                                            '--testing': colorDisplay(cell)
                                         }}
                                     >
                                         {cell}
