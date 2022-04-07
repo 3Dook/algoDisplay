@@ -35,7 +35,7 @@ function DisplayGraph(props){
 
     function handleBlock(e, cell, row, column){
         e.preventDefault()
-        if(!(cell=="A" || cell=="B")){
+        if(!(cell==="A" || cell==="B")){
             if(cell >= 0){
                 props.updateCell(-1, row, column)
             } else {
@@ -45,9 +45,9 @@ function DisplayGraph(props){
     }
 
     function colorDisplay(cell){
-        if(cell == "A" || cell == "B"){
+        if(cell === "A" || cell === "B"){
             return "gray"
-        } else if (cell == -1){
+        } else if (cell === -1){
             return "black"
         } else {
             return "white"

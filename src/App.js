@@ -9,16 +9,14 @@ function App() {
     columnSize: 2,
     rowSize: 2,
     start: {
-      symbol: 'A',
       column: 0,
       row: 0,
     },
     end: {
-      symbol: 'B',
       column: 1,
-      row: 0,
+      row: 1,
     },
-    grid: [["A","B"],[0,0]]
+    grid: [["A",0],[0,"B"]]
   })
 
   function handleUpdate(newSize){
@@ -115,6 +113,8 @@ function App() {
       ...prevState,
       grid: [...data.grid],
     }));    
+
+    pathFind();
   }
 
   function swapPosition(cellOne, cellTwo){
@@ -122,8 +122,97 @@ function App() {
     handleCellUpdate(cellTwo.content, cellOne.row, cellOne.column)
     updateGrid()
   }
+  
+  function exploreLocation(location){
+    let r = location.row;
+    let c = location.column;
+    let allNeighbors = [];
+
+    const neighbors = [
+      {row: r-1, column: c},
+      {row: r, column: c + 1},
+      {row: r + 1, column: c},
+      {row: r, column: c - 1}
+    ]
+
+    for (let i = 0; i < neighbors.length; ++i){
+        const nRow = neighbors[i].row
+        const nCol = neighbors[i].column
+
+        if(nRow < 0 || nRow > data.columnSize - 1 ){
+          continue
+        }
+
+        if(nCol < 0 || nCol > data.columnSize - 1){
+          continue
+        }
+        
+        //Blocks
+        if(data.grid[nRow][nCol] == -1){
+          continue
+        }
+
+        allNeighbors.push(neighbors[i])
+    }
+
+    return allNeighbors;
+
+  }
 
 
+  function clearGrid(){
+    // function will iterate through the grid and remove any number > 0
+    for(let i = 0; i < data.columnSize; i++){
+      for(let j = 0; j < data.columnSize; j++){
+        if(data.grid[i][j] > 0){
+          handleCellUpdate(0, i, j)
+        }
+      }
+    }
+  }
+  function showPath(current, parent){
+
+    while(current.row != data.start.row || current.column != data.start.column){
+      if(data.grid[current.row][current.column] !== "A" && data.grid[current.row][current.column] !== "B"){
+        handleCellUpdate(1, current.row, current.column)
+      }
+      current = parent[`${current.row}x${current.column}`]
+    }
+  }
+
+  function pathFind(){
+
+    clearGrid()
+    const queue = []
+    queue.push(data.start)
+
+    let visted = {};
+    let parentList = {};
+
+    while(queue.length){
+      let currentLocation = queue.shift();
+
+      if (currentLocation.row == data.end.row && currentLocation.column == data.end.column ){
+        //found the path  - walk backwards to print the path
+        showPath(currentLocation, parentList);
+        return parentList;
+      }
+
+      let vistKey = `${currentLocation.row}x${currentLocation.column}`;
+      visted[vistKey] = true;
+      let neighbors = exploreLocation(currentLocation);
+     
+
+      neighbors.forEach(neighbor =>{
+        if(visted[`${neighbor.row}x${neighbor.column}`] != true){
+          queue.push(neighbor);
+          parentList[`${neighbor.row}x${neighbor.column}`] = currentLocation;
+        }
+      })
+    }
+    console.log(parentList)
+    return -1;
+  }
 
   useEffect(()=>{
     updateGrid()
