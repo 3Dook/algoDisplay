@@ -49,6 +49,8 @@ function DisplayGraph(props){
             return "gray"
         } else if (cell === -1){
             return "black"
+        } else if (cell === 1){
+            return "yellow"
         } else {
             return "white"
         }
