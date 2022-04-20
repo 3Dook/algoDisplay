@@ -42,6 +42,8 @@ function DisplayGraph(props){
                 props.updateCell(0, row, column)
             }
         }
+        // rerun the path algo
+        props.updateGrid();
     }
 
     function colorDisplay(cell){

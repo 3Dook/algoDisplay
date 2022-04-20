@@ -222,7 +222,7 @@ function App() {
     <div className="App">
       <div className='appHeader'><h1>DDD ALGORITHM VISUALIZER</h1></div>
       <ControlButtons className='appControl'update={handleUpdate} displayGrid={updateGrid}/>
-      <DisplayGraph className='appDisplay' data={data} swap={swapPosition} updateCell={handleCellUpdate}/>
+      <DisplayGraph className='appDisplay' data={data} swap={swapPosition} updateCell={handleCellUpdate} updateGrid={updateGrid}/>
     </div>
   );
 }
