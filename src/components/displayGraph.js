@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import './display.css';
 
 
@@ -87,7 +87,7 @@ function DisplayGraph(props){
                                         }}
                                         
                                         style={{
-                                            '--testing': colorDisplay(cell)
+                                            '--colorDisplay': colorDisplay(cell)
                                         }}
                                     >
                                         {cell}

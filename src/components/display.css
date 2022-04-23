@@ -26,5 +26,7 @@
 }
 
 .cellBlock {
-    background-color: var(--testing);
+    flex-basis: 0;
+    overflow: hidden;
+    background-color: var(--colorDisplay);
 }
